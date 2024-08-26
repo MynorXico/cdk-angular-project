@@ -12,7 +12,8 @@ export class PipelineStack extends cdk.Stack {
             pipelineName: 'CdkngularProject',
             synth: new ShellStep('Synth', {
                 input: CodePipelineSource.gitHub('MynorXico/cdk-angular-project', 'main'),
-                commands: ['cd infra', 'npm ci', 'npm run build', 'npx cdk synth']
+                commands: ['cd infra', 'npm ci', 'npm run build', 'npx cdk synth'],
+                primaryOutputDirectory: "infra/cdk.out"
             })
         })
 
