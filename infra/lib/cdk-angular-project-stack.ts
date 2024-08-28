@@ -5,6 +5,7 @@ import {BucketAccessControl} from "aws-cdk-lib/aws-s3";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class CdkAngularProjectStack extends cdk.Stack {
+  public hostingBucket;
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -15,10 +16,11 @@ export class CdkAngularProjectStack extends cdk.Stack {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
 
-    const hostingBucket = new s3.Bucket(this, 'WebHostingBucket', {
-      accessControl: BucketAccessControl.PUBLIC_READ,
+    this.hostingBucket = new s3.Bucket(this, 'WebHostingBucket', {
       websiteIndexDocument: 'index.html',
-      websiteErrorDocument: 'index.html'
+      websiteErrorDocument: 'index.html',
+      bucketName: 'mxico-cdk-angular-project-stack',
+      publicReadAccess: true,
     })
   }
 }
